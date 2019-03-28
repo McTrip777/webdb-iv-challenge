@@ -1,7 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 
-const crud = require('./crud/crud-operations.js');
+const crud = require('./crud/dish-crud.js');
 
 const server = express();
 
@@ -13,9 +13,18 @@ server.get('/', (req,res) => {
     res.send('Hello World');
 })
 
-server.get('/api/recipe', async (req, res) => {
+server.get('/api/dish', async (req, res) => {
     try {
-      const recipe = await crud.find('recipe'); 
+      const dish = await crud.find('dish'); 
+      res.status(200).json(dish);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  });
+
+  server.get('/api/recipe/:id', async (req, res) => {
+    try {
+      const dish = await crud.findById(req.params.id);
       res.status(200).json(recipe);
     } catch (error) {
       res.status(500).json(error);
