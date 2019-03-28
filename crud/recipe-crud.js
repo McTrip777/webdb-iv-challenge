@@ -1,16 +1,16 @@
 const db = require('../data/dbConfig.js');
 
 module.exports = {
-  find,
-  findById,
+  findRecipes,
+  findRecipesById,
 };
 
-function find() {
-  return db('recipe');
+function findRecipes() {
+  return db('recipes');
 }
 
-function findById(id) {
-  return db('recipe')
+function findRecipesById(id) {
+  return db('recipes')
     .where({ id })
     .first();
 }
